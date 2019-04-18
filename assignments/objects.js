@@ -30,7 +30,7 @@ const intern2 = {
     "email": "kdiben1@tinypic.com",
     "gender":"M",
     "speak":function() {
-        return 'Hello, my name is ${this.object}!'
+        return `Hello, my name is ${this.name}!`
       },
 }
 
