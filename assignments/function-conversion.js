@@ -9,6 +9,7 @@ let anotherFunction = param => {
   return param;
 };
 anotherFunction("Example");
+console.log(anotherFunction);
 
 // let add = function (param1, param2) {
 //   return param1 + param2;
