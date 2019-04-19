@@ -1,0 +1,286 @@
+/*
+
+Step 1: Discuss how JS is compiled in the browser.  This leads to better understanding of hoisting and scope later.
+
+Our code is compiled in two passes of a compiler.  The first pass sets up references and the second pass assigns values to those references.  That is why we see "undefined" as a value if we don't assign anything.
+
+You can use the code below to explain how we get "undefined";
+
+*/
+
+// We have a var with no value assigned that will return "undefined" because the two pass compiler will assign "undefined" to any variable that doesn't have a value.
+var compilerTest;
+//console.log(compilerTest);
+
+/*
+
+Step 2: Variable Type Walkthrough
+
+Point out that everything you are about to talk about is found in the training kit prepare section videos and should be used later if a student is stuck.
+
+Walk through each type of variable showing how var, let, and const are different.  Use the notes below as a guide to your students.
+
+Note that I have included a bad practice "global var."  This is used as a non-example and a warning that if you don't assign a type, the browser will create a global variable.  
+
+*/
+
+// Variables
+
+/* 
+
+global var 
+
+- Automatically created even if you didn't want it to!
+- Be very careful to always assign a var, let, or const
+
+*/
+
+globalExample = "This is global and was automatically created!";
+// console.log(globalExample);
+
+/* var 
+
+- Multiple declarations are allowed with the same name
+- Function scoped (more on this later in the lesson)
+- It's value is mutable
+- Avoid using var because of the multiple declarations and function scope features
+
+*/
+
+var myVar = 'What up, I am a var!';
+// var myVar = "I just overwrote everything";
+myVar = 'I just overwrote mutable!';
+//console.log(myVar);
+
+/* let 
+
+- Multiple declarations are NOT allowed with the same name
+- block scoped
+- It's value is mutable (changable)
+
+*/
+
+let myLet = "I am a let!";
+// let myLet = "Will this work?";
+myLet = "I am mutable.";
+//console.log(myLet);
+
+/* const 
+
+- Multiple declarations are NOT allowed with the same name
+- block scoped
+- It's value is immutable
+
+*/
+
+const myConst = "I am a const!";
+// myConst = "Am I mutable?";
+// console.log(myConst);
+
+/*
+
+/*
+
+Step 2: Block of Code and Scope
+
+With var, let, and const we learned about some features like block and function scope, discuss how a block of code is different than a block of code with a function.  We have used a Kingdom analogy in the past that works well to describe scope.
+
+*/
+
+/*
+
+block of code 
+ - Think of a block of code like a kingdom's boundaries protecting it from the global scope or "outside world"
+ - Block of code can be protected by: if, for, while, function
+
+*/
+
+// Var Block Kingdom
+{
+  var varBlockCitizen = "I was created in var block kingdom!";
+  // console.log(varBlockCitizen);
+}
+// var ignores its kingdom's rule! Var will only obey a function guard!
+// console.log(varBlockCitizen);
+
+// Let Block Kingdom
+{
+  let letBlockCitizen = "I was created in let block kingdom!";
+  // console.log(letBlockCitizen);
+}
+// let obeys its kingdom's rule, and that's why we call it "block scoped".  The same goes for const as it is also block scoped
+// console.log(letBlockCitizen);
+
+
+/*
+
+Step 3: Functions Declarations
+
+Now that you have explained var, let, const, scope, and what a block of code is, you are prepared to discuss functions.
+
+Major concepts to review:
+
+1. The function keyword guards the block of code, var finally listens
+2. In order to gain access to a function, we must call it, we often call this "invoking" a function.
+3. When invoking a function, we can pass values into the function block using arguments.
+4. We can receive arguments in placeholders called parameters.  
+
+The difference between arguments and parameters needs to be really clear, many students trip up on this.
+
+*/
+
+// Functions
+
+// Function Declaration
+function add(num1, num2) {
+  // scope belongs to myFunction
+  
+  // returning a value back to the global kingdom base on the invocation
+  return num1 + num2;
+}
+
+// invoke a function
+//console.log(add(2,4));
+
+/*
+
+Step 4: Function Expressions
+
+Function expressions are the gateway to understanding anonymous functions and arrow functions.  Take time to convert a function declaration into a function expression and showcase anonymous functions.
+
+*/
+
+/* 
+
+Function Expression
+- Take on attributes of the variable type they are in
+
+*/
+const myFuncExpression = function(num1, num2) {
+  return num1 + num2;
+}
+//console.log(myFuncExpression(2,4));
+
+
+/*
+
+Step 5: Arrow Function Expressions
+
+We want students to be exposed to this syntax as it is used everywhere later on in life.  Please only show a simple conversion an arrow expression as the many nuances can hurt learning progress.  
+
+Of course you can dig a little deeper and show some of the fun syntax pieces, just be careful to only require the conversion presented below.
+
+*/
+
+
+/* 
+
+Arrow Function Expression
+  - Syntax is more succint in some cases
+  - unbinding of the this keyword in functions (no this keyword will be covered later in the course!)
+*/
+
+const myArrowFunc = (num1, num2) => {
+  return num1 + num2;
+}
+//console.log(myArrowFunc(2,4));
+
+
+/*
+
+Step 6: Object Literals
+
+Walk through the syntax below highlighting the key value pairs.
+
+Be sure to point out the methods are just functions inside of objects.  This distinction needs to be repeated several times.
+
+*/
+
+// Object Literals
+
+const animal = {
+  // properties of the object
+  name: "Zebra",
+  weight: 100,
+  height: 65,
+  habitat: "Plains",
+  // Functions inside of objects are called methods
+  eat: function() {
+    return "This Zebra likes to eat grass";
+  },
+  run: function() {
+    return "The Zebra is running!";
+  }
+};
+
+// console.log(Object.keys(animal));
+//console.log(animal.run());
+
+
+/*
+
+Step 7: Arrays
+
+Highlight the unique nature of arrays being index based.  Note that the index starts at the 0th position and count out each item in the array starting with zero to make this clear.
+
+With your knowlege of methods in place, go to MDN and showcase how Array has many methods to choose from.  
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+
+We also talk about using a gist called Arrayzing to go from english sentences to code easier:
+
+https://gist.github.com/ourmaninamsterdam/1be9a5590c9cf4a0ab42
+
+Note that arrays can have objects inside of them!
+
+*/
+
+
+/* 
+
+Arrays
+- order is king!
+
+*/
+const fruits = ["apple","pear","banana","watermellon"];
+
+/* 
+
+What do I need to do this?
+1. you need the array
+2. you need to make the array alphabetical
+3. Find out how to do that
+*/
+
+fruits.push('peach');
+
+fruits.reverse();
+
+// let someNum = 4;
+// someNum++;
+
+//console.log(someNum);
+
+/*
+
+Step 8: For loop review
+
+for loops are used in the project today and it's worth reviewing them for the class.  Talk about how we use loops to iterate over arrays and objects alike.  Loops are a fundamental part of JS and many other languages so stress its importance.
+
+That ends the guided project.
+
+*/
+
+for(let i = 0; i < fruits.length; i++ ) {
+  //console.log(fruits[i]);
+}
+
+
+
+
+
+
+
+
+
